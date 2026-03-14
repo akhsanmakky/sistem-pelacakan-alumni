@@ -7,22 +7,6 @@ Sistem digunakan untuk melakukan **pelacakan perkembangan karier alumni** secara
 
 ---
 
-# Demo Aplikasi
-
-**Repository GitHub**
-https://github.com/akhsanmakky/APLIKASI-PELACAKAN-ALUMNI
-
-**Link Publish Web**
-(Isi setelah deploy, misalnya Render / Railway)
-
-Contoh:
-
-```
-https://pelacakan-alumni.onrender.com
-```
-
----
-
 # Deskripsi Sistem
 
 Sistem Pelacakan Alumni adalah aplikasi web yang membantu pihak kampus dalam memantau perkembangan karier alumni melalui simulasi pencarian data dari berbagai sumber publik seperti:
