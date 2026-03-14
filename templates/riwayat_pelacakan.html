@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block title %}Riwayat Pelacakan - Sistem Pelacakan Alumni{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0"><i class="fas fa-history me-2"></i>Riwayat Pelacakan Alumni</h1>
+    <a href="{{ url_for('alumni') }}" class="btn btn-primary">
+        <i class="fas fa-users me-2"></i>Kelola Alumni
+    </a>
+</div>
+
+<div class="card shadow">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Semua Hasil Pelacakan ({{ hasil|length }})</h6>
+    </div>
+    <div class="card-body">
+        {% if hasil %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Tanggal</th>
+                        <th>Alumni</th>
+                        <th>Jabatan</th>
+                        <th>Perusahaan</th>
+                        <th>Lokasi</th>
+                        <th>Sumber</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for hp, alum in hasil %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ hp.tanggal_pelacakan.strftime('%d/%m/%Y %H:%M') }}</td>
+                        <td>
+                            <strong>{{ hp.nama }}</strong><br>
+                            <small class="text-muted">{{ alum.program_studi }} - {{ alum.tahun_lulus }}</small>
+                        </td>
+                        <td>
+                            <span class="badge bg-success">{{ hp.jabatan }}</span>
+                        </td>
+                        <td>{{ hp.perusahaan }}</td>
+                        <td>
+                            <i class="fas fa-map-marker-alt text-danger me-1"></i>
+                            {{ hp.lokasi }}
+                        </td>
+                        <td>
+                            <span class="badge bg-primary">{{ hp.sumber }}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fas fa-history fa-3x text-muted mb-3"></i>
+            <h5 class="text-muted">Belum ada riwayat pelacakan</h5>
+            <p class="text-muted mb-4">Lakukan pelacakan alumni terlebih dahulu.</p>
+            <a href="{{ url_for('alumni') }}" class="btn btn-primary">
+                <i class="fas fa-users me-2"></i>Kelola Alumni & Lacak
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

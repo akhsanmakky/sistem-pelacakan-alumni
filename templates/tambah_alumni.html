@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}Tambah Alumni - Sistem Pelacakan Alumni{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-plus me-2"></i>Tambah Data Alumni Baru
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="nama" class="form-label">Nama Lengkap Alumni <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="nama" name="nama" required 
+                                   placeholder="Contoh: Ahmad Ramadhan">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="program_studi" class="form-label">Program Studi <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="program_studi" name="program_studi" required 
+                                   placeholder="Contoh: Teknik Informatika">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="tahun_lulus" class="form-label">Tahun Lulus <span class="text-danger">*</span></label>
+    <input type="number" class="form-control" id="tahun_lulus" name="tahun_lulus" required 
+                                   min="1900" max="{{ current_year }}" value="{{ current_year }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="kata_kunci" class="form-label">Kata Kunci Pencarian <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="kata_kunci" name="kata_kunci" required 
+                                   placeholder="Contoh: Ahmad Ramadhan Teknik Informatika">
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <a href="{{ url_for('alumni') }}" class="btn btn-secondary me-md-2">
+                            <i class="fas fa-arrow-left me-2"></i>Kembali
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Simpan Alumni
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

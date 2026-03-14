@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block title %}Kelola Alumni - Sistem Pelacakan Alumni{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0"><i class="fas fa-users me-2"></i>Kelola Data Alumni</h1>
+    <a href="{{ url_for('tambah_alumni') }}" class="btn btn-primary">
+        <i class="fas fa-plus me-2"></i>Tambah Alumni
+    </a>
+</div>
+
+<!-- Search Form -->
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <form method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search" placeholder="Cari alumni berdasarkan nama..." 
+                       value="{{ request.args.get('search', '') }}">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+                {% if request.args.get('search') %}
+                <a href="{{ url_for('alumni') }}" class="btn btn-secondary">Bersihkan</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Alumni Table -->
+<div class="card shadow">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Daftar Alumni ({{ alumni|length }})</h6>
+    </div>
+    <div class="card-body">
+        {% if alumni %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Nama</th>
+                        <th>Program Studi</th>
+                        <th>Tahun Lulus</th>
+                        <th>Kata Kunci</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for alum in alumni %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ alum.nama }}</td>
+                        <td>{{ alum.program_studi }}</td>
+                        <td>{{ alum.tahun_lulus }}</td>
+                        <td>{{ alum.kata_kunci[:50] }}{% if alum.kata_kunci|length > 50 %}...{% endif %}</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a href="{{ url_for('lacak_alumni', id=alum.id) }}" class="btn btn-info btn-sm">
+                                    <i class="fas fa-search me-1"></i>Lacak
+                                </a>
+                                <a href="{{ url_for('edit_alumni', id=alum.id) }}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{{ url_for('hapus_alumni', id=alum.id) }}" class="btn btn-danger btn-sm" 
+                                   onclick="return confirm('Yakin hapus {{ alum.nama }}?')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fas fa-users fa-3x text-muted mb-3"></i>
+            <h5 class="text-muted">Belum ada data alumni</h5>
+            <a href="{{ url_for('tambah_alumni') }}" class="btn btn-primary">Tambah Alumni Pertama</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

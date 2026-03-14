@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block title %}Hasil Pelacakan - {{ alumni.nama }} - Sistem Pelacakan Alumni{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">
+        <i class="fas fa-search me-2 text-success"></i>
+        Hasil Pelacakan Alumni
+    </h1>
+    <a href="{{ url_for('alumni') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-2"></i>Kembali
+    </a>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow border-success border-3">
+            <div class="card-header bg-gradient text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-user-tie me-2"></i>Informasi Alumni Ditemukan
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Nama Alumni:</label>
+                        <div class="form-control-plaintext bg-light p-3 border rounded">
+                            {{ hasil.nama }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Sumber:</label>
+                        <span class="badge bg-primary fs-6 px-3 py-2">{{ hasil.sumber }}</span>
+                    </div>
+                </div>
+                
+                <hr class="my-4">
+                
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Jabatan:</label>
+                        <div class="form-control-plaintext bg-light p-3 border rounded">
+                            <i class="fas fa-briefcase me-2 text-success"></i>{{ hasil.jabatan }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Perusahaan:</label>
+                        <div class="form-control-plaintext bg-light p-3 border rounded">
+                            <i class="fas fa-building me-2 text-primary"></i>{{ hasil.perusahaan }}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-3">
+                    <div class="col-md-8">
+                        <label class="form-label fw-bold">Lokasi:</label>
+                        <div class="form-control-plaintext bg-light p-3 border rounded">
+                            <i class="fas fa-map-marker-alt me-2 text-danger"></i>{{ hasil.lokasi }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-transparent border-0 text-center">
+                <a href="{{ url_for('simpan_pelacakan', alumni_id=alumni_id) }}" 
+                   class="btn btn-success btn-lg px-5">
+                    <i class="fas fa-save me-2"></i>
+                    Simpan Hasil Pelacakan
+                </a>
+            </div>
+        </div>
+        
+        <div class="card shadow mt-4">
+            <div class="card-body text-center p-4">
+                <i class="fas fa-info-circle fa-2x text-info mb-3"></i>
+                <h6 class="text-muted">Catatan:</h6>
+                <p class="mb-0">Hasil pelacakan ini adalah simulasi untuk keperluan demo sistem.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
